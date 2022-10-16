@@ -1,0 +1,23 @@
+{
+    "id": "wuzehao.app.sub",
+    "name": "wuzehao 脚本订阅",
+    "description": "该订阅兼容BoxJs以及QX Gallery",
+    "author": "@wuzehao",
+    "icon": "https://avatars2.githubusercontent.com/u/53217160",
+    "repo": "https://github.com/wuzehao16/script/tree/main",
+    "apps": [ {
+        "id": "openDoor",
+        "name": "福田智慧门禁",
+        "descs_html": [
+            "福田智慧门禁"
+        ],
+        "keys": [
+            "openDoor"
+        ],
+        "settings": [],
+        "script": "https://raw.githubusercontent.com/wuzehao16/script/main/qx/door.js",
+        "author": "@wuzehao",
+        "repo": "https://github.com/wuzehao16/script/blob/main/qx/door.js",
+        "icons": ["https://raw.githubusercontent.com/wuzehao16/script/main/img/door.jpg","https://raw.githubusercontent.com/wuzehao16/script/main/img/door.jpg"]
+    }]
+}
