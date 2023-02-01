@@ -9,12 +9,9 @@
 // 新建一个实例对象, 把兼容函数定义到$中, 以便统一调用
 let $ = new nobyda();
 
-// 读取哔哩哔哩漫画签到脚本所使用的Cookie
-let cookie = $.read("CookieBM");
+let cookie ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzM2OTg3ODQsImV4cCI6MTcwNTIzNDc4NCwiYXVkIjoidXNlciIsInVpZCI6Ijc3MDkwNTFBMUFFQTVGRTQxMzFBN0IzN0QwQzgyMzU2IiwicGhvbmUiOiIxODM3MzIzMzg3MiJ9.n_TMefeVUBrGUBcXQR7TS6ubYgdipLkB87MZY150BvjB51uuhOW55dmqiWeFJJFG2IjZUvEpZOoNfIgAx4J7JiK2D0QCk5ckCt98lI02D0Vk3KUe3-25ctoLhac01FzJJHz8B4RSf7OrZphiirRQ6tvOXF2ZxE4THe_unuzYsZQ";
 
 
-// 预留的空对象, 便于函数之间读取数据
-let user = {};
 
 (async function () {
   // 立即运行的匿名异步函数
@@ -30,8 +27,12 @@ function openDoor() {
   const listUrl = {
     //查询商品接口
     url: "https://smartims-api.heyzhima.com/api/v2/gate/open",
-    headers: {},
-    body: RequestBody
+    headers: {
+            'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'authorization': 'Bearer ' + cookie,
+    },
+    body: JSON.stringify(RequestBody)
   };
   return new Promise((resolve) => {
     //主函数返回Promise实例对象, 以便后续调用时可以实现顺序执行异步函数
@@ -43,6 +44,7 @@ function openDoor() {
           throw new Error(error); //如果请求失败, 例如无法联网, 则抛出一个异常
         } else {
           const body = JSON.parse(data); //解析响应体json并转化为对象
+          console.log(data)
           if (body.code == 200 && body.data.mes == "开门成功") {
             //如果接口正常返回商品信息
             console.log("开门成功");
@@ -53,7 +55,7 @@ function openDoor() {
         }
       } catch (e) {
         //接住try代码块中抛出的异常并打印日志
-        console.log(e);
+        console.log(e,error);
       } finally {
         //finally语句在try和catch之后无论有无异常都会执行
         resolve(); //异步操作成功时调用, 将Promise对象的状态标记为"成功", 表示已完成查询商品
